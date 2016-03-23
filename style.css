@@ -1,0 +1,136 @@
+*, *:focus{
+    outline: none !important;
+    transition: all .3s ease;
+}
+
+body{
+    background-color: #f5f5f5;
+}
+
+h1{
+    margin-top: 60px;
+}
+
+.heading{
+    font-family: Inconsolata, sans-serif;
+    font-size: 45pt;
+    color: #6600cc;
+    opacity: 0.3;
+    text-align: center;
+}
+
+.container{
+    border: 1px solid #bfbfbf;
+    max-width: 500px;
+    min-height: 60px;
+    margin: 0 auto;
+    box-shadow: 0 15px 40px 5px #bfbfbf;
+    padding: 0;
+    overflow: hidden;
+    background: #f9f9f9;
+    margin-bottom: 60px;
+}
+
+task{
+    width: 100px;
+    height: 20px;
+}
+
+.task-example{
+    border-top: 1px solid #bfbfbf;
+    position: relative;
+    min-height: 50px;
+    padding: 13px 20px;
+    font-family: 'Source Code Pro', Arial;
+}
+.task-example:last-child{
+    border-bottom: 1px solid #bfbfbf;
+}
+.task-example:first-child{
+    box-shadow: 0 -1px 5px #bfbfbf;
+}
+
+.task-example > label{
+    margin-left: 40px;
+    width: 100%;
+    max-width: 390px;
+    word-break: break-all;
+}
+
+.task-example > input{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-51%);
+    margin: 0;
+}
+
+.glyphicon-trash {
+    cursor: pointer;
+    font-size: 12px;
+    color: #bfbfbf;
+    right: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.glyphicon-trash:hover{
+    color: black;
+}
+
+.clear-completed{
+    float: right;
+}
+
+.bottom-butt{
+    padding: 5px 40px;
+}
+
+.head-task{
+    padding: 7px 20px;
+    max-width: 500px;
+    min-height: 60px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.task-check{
+    margin-top: 15px !important;
+}
+
+.task-input{
+    width: 85%;
+    max-width: 390px;
+    font-size: 23px;
+    display: inline-block;
+    position: absolute;
+    left: 60px;
+    margin-top: 6px;
+}
+
+.task-list{
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+[type="text"]{
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    border-radius: 4px;
+    box-shadow: none;
+    font-family: Inconsolata, Arial;
+}
+
+::-webkit-input-placeholder {
+    color: #bfbfbf;
+}
+:-moz-placeholder { /* Firefox 18- */
+    color: #bfbfbf;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+    color: #bfbfbf;
+}
+:-ms-input-placeholder {
+    color: #bfbfbf;
+}
