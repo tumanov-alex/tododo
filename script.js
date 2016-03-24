@@ -7,10 +7,17 @@ App.controller('AppCtrl', function ($scope, localStorageService) {
     if(localStorageService.isSupported) {
         if(localStorageService.get('tasks') == null) {
             $scope.tasks = [];
-            localStorageService.set('tasks', $scope.tasks);
+            localStorageService.set('tasks', []);
         }
         else{
             $scope.tasks = localStorageService.get('tasks');
+        }
+        if(localStorageService.get('noTrueChecks') == null) {
+            $scope.noTrueChecks = true;
+            localStorageService.set('noTrueChecks', true);
+        }
+        else{
+            $scope.noTrueChecks = localStorageService.get('noTrueChecks');
         }
         $scope.saveLocally = function() {
             localStorageService.set('noTrueChecks', $scope.noTrueChecks);
@@ -20,18 +27,6 @@ App.controller('AppCtrl', function ($scope, localStorageService) {
         $scope.tasks = [];
     }
 
-    ($scope.mainCheckState = function() {
-        for(check in $scope.tasks) {
-            if(!$scope.tasks[check].checked){
-                $scope.mainCheck = false;
-                break;
-            }
-            else{
-                $scope.mainCheck = true;
-            }
-        }
-        $scope.saveLocally();
-    })();
     $scope.newTask = function () {
         if($scope.tasks.length == 0) {
             $scope.mainCheck = false;
@@ -61,6 +56,19 @@ App.controller('AppCtrl', function ($scope, localStorageService) {
         $scope.noTrueChecks = true;
         $scope.saveLocally();
     };
+    ($scope.mainCheckState = function() {
+        for(check in $scope.tasks) {
+            if(!$scope.tasks[check].checked){
+                $scope.mainCheck = false;
+                break;
+            }
+            else{
+                $scope.mainCheck = true;
+            }
+        }
+        $scope.isThereAnyTrueCheck();
+        $scope.saveLocally();
+    })();
     $scope.allChecksAreTrue = function() {
         for(task in $scope.tasks) {
             if($scope.tasks[task].checked == false) {
