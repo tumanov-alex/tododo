@@ -40,6 +40,7 @@ App.controller('AppCtrl', function ($scope, localStorageService) {
             $scope.tasks.push({text: this.text, checked: false, display: true});
             $scope.text = '';
         }
+        $scope.mainCheckState();
         $scope.saveLocally();
     };
     $scope.checkAll = function() {
