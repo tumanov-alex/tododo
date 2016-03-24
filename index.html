@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>TODODO!</title>
-    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    <script src="./angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script src="./libraries/jquery-2.2.2.min.js"></script>
+    <script src="./libraries/angular.min.js"></script>
+    <script src="./libraries/angular-local-storage.min.js"></script>
+    <script src="./script.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Inconsolata:700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:500' rel='stylesheet' type='text/css'>
-    <script src="script.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body ng-app="App" ng-controller="AppCtrl">
 <h1 class="heading">TODODO!</h1>
@@ -29,7 +28,7 @@
     <ul class="task-list">
         <li class="task-example"
             ng-repeat="task in tasks | filter: {display:true}">
-            <input type="checkbox" ng-model="task.checked" ng-click="mainCheckUndo()" ng-checked="task.checked">
+            <input type="checkbox" ng-model="task.checked" ng-click="mainCheckState()" ng-checked="task.checked">
             <label>{{task.text}}</label>
             <div class="glyphicon glyphicon-trash" ng-click="deleteItem(task)"></div>
         </li>

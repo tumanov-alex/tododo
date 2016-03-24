@@ -23,17 +23,11 @@ h1{
     border: 1px solid #bfbfbf;
     max-width: 500px;
     min-height: 60px;
-    margin: 0 auto;
+    margin: 0 auto 60px auto;
     box-shadow: 0 15px 40px 5px #bfbfbf;
     padding: 0;
     overflow: hidden;
     background: #f9f9f9;
-    margin-bottom: 60px;
-}
-
-task{
-    width: 100px;
-    height: 20px;
 }
 
 .task-example{

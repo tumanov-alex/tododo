@@ -5,13 +5,12 @@ App.config(function (localStorageServiceProvider) {
 
 App.controller('AppCtrl', function ($scope, localStorageService) {
     if(localStorageService.isSupported) {
-        $scope.tasks = localStorageService.get('tasks');
-        $scope.noTrueChecks = localStorageService.get('noTrueChecks');
-        if($scope.tasks.length == 0) {
+        if(localStorageService.get('tasks') == null) {
             $scope.tasks = [];
+            localStorageService.set('tasks', $scope.tasks);
         }
-        if($scope.noTrueChecks == undefined) {
-            $scope.noTrueChecks = true;
+        else{
+            $scope.tasks = localStorageService.get('tasks');
         }
         $scope.saveLocally = function() {
             localStorageService.set('noTrueChecks', $scope.noTrueChecks);
@@ -21,7 +20,18 @@ App.controller('AppCtrl', function ($scope, localStorageService) {
         $scope.tasks = [];
     }
 
-    $scope.mainCheck = false;
+    ($scope.mainCheckState = function() {
+        for(check in $scope.tasks) {
+            if(!$scope.tasks[check].checked){
+                $scope.mainCheck = false;
+                break;
+            }
+            else{
+                $scope.mainCheck = true;
+            }
+        }
+        $scope.saveLocally();
+    })();
     $scope.newTask = function () {
         if($scope.tasks.length == 0) {
             $scope.mainCheck = false;
@@ -58,13 +68,6 @@ App.controller('AppCtrl', function ($scope, localStorageService) {
             }
         }
         $scope.allChecksAre = true;
-    };
-    $scope.mainCheckUndo = function() {
-        if($scope.mainCheck) {
-            $scope.mainCheck = false;
-        }
-        $scope.isThereAnyTrueCheck();
-        $scope.saveLocally();
     };
     $scope.clearCompleted = function() {
         for(var task = 0; task < $scope.tasks.length; ++task) {
