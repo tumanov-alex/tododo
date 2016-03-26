@@ -4,31 +4,10 @@ App.config(function (localStorageServiceProvider) {
 });
 
 App.controller('AppCtrl', function ($scope, localStorageService) {
-    if(localStorageService.isSupported) {
-        if(localStorageService.get('tasks') == null) {
-            $scope.tasks = [];
-            localStorageService.set('tasks', []);
-        }
-        else{
-            $scope.tasks = localStorageService.get('tasks');
-        }
-        if(localStorageService.get('noTrueChecks') == null) {
-            $scope.noTrueChecks = true;
-            localStorageService.set('noTrueChecks', true);
-        }
-        else{
-            $scope.noTrueChecks = localStorageService.get('noTrueChecks');
-        }
-        $scope.saveLocally = function() {
-            localStorageService.set('noTrueChecks', $scope.noTrueChecks);
-            return localStorageService.set('tasks', $scope.tasks);
-        };
-    }else{
-        $scope.tasks = [];
-    }
+    localStorageServiceSupport($scope, localStorageService);
 
     $scope.newTask = function () {
-        if($scope.tasks.length == 0) {
+        if($scope.tasks.length) {
             $scope.mainCheck = false;
         }
         if ($scope.text) {
@@ -48,7 +27,7 @@ App.controller('AppCtrl', function ($scope, localStorageService) {
     };
     $scope.isThereAnyTrueCheck = function() {
         for(check in $scope.tasks) {
-            if($scope.tasks[check].checked == true) {
+            if($scope.tasks[check].checked) {
                 $scope.noTrueChecks = false;
                 return;
             }
@@ -71,7 +50,7 @@ App.controller('AppCtrl', function ($scope, localStorageService) {
     })();
     $scope.allChecksAreTrue = function() {
         for(task in $scope.tasks) {
-            if($scope.tasks[task].checked == false) {
+            if(!$scope.tasks[task].checked) {
                 $scope.allChecksAre = false;
                 return;
             }
@@ -79,10 +58,11 @@ App.controller('AppCtrl', function ($scope, localStorageService) {
         $scope.allChecksAre = true;
     };
     $scope.clearCompleted = function() {
-        for(var task = 0; task < $scope.tasks.length; ++task) {
-            if($scope.tasks[task].checked == true) {
+        for(var task = 0, length = $scope.tasks.length; task < length; ++task) {
+            if($scope.tasks[task].checked) {
                 $scope.tasks.splice(task, 1);
                 --task;
+                --length;
             }
         }
         $scope.isThereAnyTrueCheck();
@@ -94,6 +74,7 @@ App.controller('AppCtrl', function ($scope, localStorageService) {
                 $scope.tasks.splice(task, 1);
                 localStorageService.remove('tasks');
                 $scope.isThereAnyTrueCheck();
+                $scope.mainCheckState();
                 $scope.saveLocally();
                 return;
             }
