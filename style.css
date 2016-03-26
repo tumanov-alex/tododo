@@ -48,7 +48,7 @@ h1{
     margin-left: 40px;
     width: 100%;
     max-width: 390px;
-    word-break: break-all;
+    word-break: keep-all;
 }
 
 .task-example > input{
